@@ -1,0 +1,13 @@
+If you get errors related to agent metircs are being dropped by host monitor or any other ntp related errors, install ntp on all your hosts 
+# yum install ntp
+# ntpdate -u -s 0.centos.pool.ntp.org 1.centos.pool.ntp.org 2.centos.pool.ntp.org
+# systemctl start ntpd
+# systemctl enable ntp
+
+if this doesn't solve the issue then sync your hosts clock according to hwclock of the machine
+# hwclock -w
+
+To check if ntp is syncronized,
+# timedatectl
+if this shows ntp not syncronized
+# timedatectl set-ntp true
