@@ -1,0 +1,14 @@
+This is related to the compression codecs that exits in hadoop.
+IN cloudera, below codecs are already installed
+Gzip, Snappy, Bzip2 
+
+For lzo and lzop we have to install using the GPLextra repo from cloudera
+# wget http://archive.cloudera.com/gplextras5/redhat/7/x86_64/gplextras/cloudera-gplextras5.repo
+
+# yum install lzo lzop hadoop-lzo       we have to do this on every host
+after installing the packages for these codecs we have to add them into the list of codecs using cloudera manager
+
+Go to HDFS -> Configuration. Search compression then add below codecs
+com.hadoop.compression.lzo.LzopCodec
+com.hadoop.compression.lzo.LzoCodec
+
