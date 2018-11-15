@@ -1,0 +1,11 @@
+$ hadoop fs -setfacl [-R] [-b |-k -m |-x <acl_spec> <path>] |[--set <acl_spec> <path>]
+- -b: Remove all but the base ACL entries. The entries for user, group and others are retained for compatibility with permission bits.
+- -k: Remove the default ACL.
+- -R: Apply operations to all files and directories recursively.
+- -m: Modify ACL. New entries are added to the ACL, and existing entries are retained.
+- -x: Remove specified ACL entries. Other ACL entries are retained.
+- --set: Fully replace the ACL, discarding all existing entries. The acl_spec must include entries for user, group, and others for compatibility with permission bits.
+- acl_spec: Comma separated list of ACL entries.
+- path: File or directory to modify.
+
+# hadoop fs -getfacl [-R] <path>            to check the acl applied on a particular file or directory
