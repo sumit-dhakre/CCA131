@@ -11,3 +11,9 @@ To check if ntp is syncronized,
 # timedatectl
 if this shows ntp not syncronized
 # timedatectl set-ntp true
+
+To quickly syncronize to ntp
+systemctl stop ntpd
+# ntpdate pool.ntp.org
+ 5 Jul 10:36:58 ntpdate[2190]: adjust time server 95.81.173.74 offset -0.005354 sec
+# systemctl start ntpd
