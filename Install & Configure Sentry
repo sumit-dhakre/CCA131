@@ -1,0 +1,12 @@
+Add Service
+Choose Sentry
+Choose the two nodes where install sentry service and gateway
+Insert Sentry DB details
+
+set properly permissions on hive metastore:
+# sudo -u hdfs hdfs dfs -chmod -R 771 /user/hive/warehouse
+# sudo -u hdfs hdfs dfs -chown -R hive:hive /user/hive/warehouse
+
+disable HiveServer2 Impersonation
+
+enable Sentry Service for Hive (Hive -> Configurations -> Category main -> Sentry Service -> enable Sentry)
