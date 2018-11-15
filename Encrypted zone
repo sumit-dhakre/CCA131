@@ -1,0 +1,22 @@
+Add KMS Service and follow the wizard
+
+To fix remote exception error while creating encrpted zone,
+Add the below property in hdfs-site.xml
+<property>
+ <name>dfs.encryption.key.provider.uri</name>
+ <value>kms://http@kms-host-ip:16000/kms</value>
+</property>
+
+# As the normal user, create a new encryption key
+hadoop key create myKey
+
+# As the super user, create a new empty directory and make it an encryption zone
+hadoop fs -mkdir /zone
+hdfs crypto -createZone -keyName myKey -path /zone
+
+# chown it to the normal user
+hadoop fs -chown myuser:myuser /zone
+
+# As the normal user, put a file in, read it out
+hadoop fs -put helloWorld /zone
+hadoop fs -cat /zone/helloWorld
