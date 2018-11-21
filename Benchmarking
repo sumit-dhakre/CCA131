@@ -1,0 +1,33 @@
+There are 2 benchmarking suites. First involves below 3 toipcs
+
+1. Teragen
+2. Terasort
+3. Teravalidate
+
+and then there is TestDFSIO
+
+Perform these operations using hdfs user under hdfs home directory 
+Teragen - to generate the input data
+hadoop jar /opt/cloudera/parcels/CDH/jars/hadoop-examples.jar teragen -D dfs.blocksize=268435456 4096 /home/hdfs/newteragen
+
+here 4096 is number of rows and each row is of 100bytes
+
+Terasort
+hadoop jar /opt/cloudera/parcels/CDH/jars/hadoop-examples.jar terasort /home/hdfs/newteragen /home/hdfs/terasort
+
+Teravalidate
+hadoop jar /opt/cloudera/parcels/CDH/jars/hadoop-examples.jar teravalidate /home/hdfs/tereasort /home/hdfs/newteravalidate
+
+TestDFSIO - This test the input output speed
+TO write files
+hadoop jar /opt/cloudera/parcels/CDH/jars/hadoop-test-2.6.0-mr1-cdh5.15.1.jar TestDFSIO -write -nrFiles 3 -size 100MB
+
+To read files
+hadoop jar /opt/cloudera/parcels/CDH/jars/hadoop-test-2.6.0-mr1-cdh5.15.1.jar TestDFSIO -read -nrFiles 3 -size 100MB
+
+Always run write first and then read
+
+
+
+
+
