@@ -1,0 +1,33 @@
+The various command to create,append,open delete files are as below:
+
+Open a file 
+curl -i "https://machine1.local.com:14000/webhdfs/v1/<path of file in hdfs>?op=open&user.name=hdfs"
+
+here username is for authentication if the user doesn't have permission to open that file you will get permission denied message so check the permission of the user
+
+
+Create a file
+It is a 2-step process
+
+step 1 - curl -i -X PUT "https://machine1.local.com:14000/webhdfs/v1/<path of file in hdfs to be created>?op=create&user.name=hdfs"
+This will redirect to the datanode with the below message
+
+HTTP/1.1 307 Temporary Redirect
+Server: Apache-Coyote/1.1
+Set-Cookie: hadoop.auth="u=hdfs&p=hdfs&t=simple-dt&e=1542869500722&s=NwCEWNxo5HiWeCGD36HBfu8GF7I="; Path=/; HttpOnly
+Location: http://machine1.local.com:14000/webhdfs/v1/user/hdfs/newfile?op=CREATE&user.name=hdfs&data=true
+Content-Type: application/json
+Content-Length: 0
+Date: Wed, 21 Nov 2018 20:51:43 GMT
+
+
+Step 2 - curl -H 'content-type:application/octet-stream' -i -X PUT -T <path of local file whose data will be copied to the new file> "<location from above result>"
+
+Create directory
+curl -i -X PUT "http://<HOST>:<PORT>/webhdfs/v1/<PATH>?op=MKDIRS
+
+Rename a file or directory
+curl -i -X PUT "<HOST>:<PORT>/webhdfs/v1/<PATH>?op=RENAME&destination=<PATH>"
+
+Delete a file or directory
+curl -i -X DELETE "http://<host>:<port>/webhdfs/v1/<path>?op=DELETE[&recursive=<true|false>]"
